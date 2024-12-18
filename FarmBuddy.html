@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" class="hydrated">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Farm Buddy</title>
+    <link rel="stylesheet" href="web.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            🌱 Farm Buddy
+        </div>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#recommend">Recommendation</a>
+            <a href="#irrigation">Irrigation</a>
+            <a href="#contact">Contact</a>
+            <a href="chatbot.html">Chatbot</a>
+        </nav>
+        
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Empowering Smarter Farming</h1>
+        <h2>Harvest the benefits of technology</h2>
+        <h2>with your AI-based farm buddy—a trusted ally that's always by your side,</h2>
+        <h2> ensuring your farm thrives like never before.</h2><br>
+        <a href="#recommend" class="cta-button">Get Started</a>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>THE TEAM</h2>
+        <p>Meet the passionate team behind Farm Buddy, dedicated to making farming smarter and more efficient.</p>
+        <div class="team">
+            <!-- Team Member 1 -->
+            <div class="team-member">
+                <img src="hafsaharrm.jpg" alt="HafsaHarrm" class="profile-pic">
+                <h3>Hafsa Harrm</h3>
+               
+            </div>
+            <!-- Team Member 2 -->
+            <div class="team-member">
+                <img src="shiza.jpg" alt="Sheeza" class="profile-pic">
+                <h3>Sheeza Baig</h3>
+               
+            </div>
+            <!-- Team Member 3 -->
+            <div class="team-member">
+                <img src="fareeha.jpg" alt="Fareeha" class="profile-pic">
+                <h3>Fareeha Nadeem</h3>
+                
+            </div>
+        </div>
+    </section>
+    <!-- Crop Recommendation -->
+    <section id="recommend" class="section">
+        <h2>Crop Recommendation</h2>
+        <p>Find the best crops to plant based on your soil type.</p>
+        <form id="recommendForm" class="form">
+            <label for="soilType">Choose Soil Type:</label>
+            <select id="soilType" name="soilType" required>
+                <option value="">Select</option>
+                <option value="loamy">Loamy</option>
+                <option value="clayey">Clayey</option>
+                <option value="sandy">Sandy</option>
+            </select>
+            <button type="button" id="recommendButton">Recommend Crops</button>
+        </form>
+        <div id="cropResult" class="result"></div>
+    </section>
+
+    <!-- Irrigation Schedule -->
+    <section id="irrigation" class="section">
+        <h2>Irrigation Schedule</h2>
+        <p>Get a personalized water requirement schedule for your crops.</p>
+        <form id="irrigationForm" class="form">
+            <label for="cropType">Enter Crop Name:</label>
+            <input type="text" id="cropType" name="cropType" placeholder="e.g., Wheat" required>
+            <button type="button" id="scheduleButton">Get Schedule</button>
+        </form>
+        <div id="irrigationResult" class="result"></div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Fill out the form below or use the contact information provided to reach out to
+            us.</p>
+        <div class="contact-info">
+            <p><strong>Email:</strong> info@farmbuddy.com</p>
+            <p><strong>Phone:</strong> +92-333-1046448</p>
+            <p><strong>Address:</strong> 123 Green Fields, AgriTech Faisalabad, Pakistan</p>
+        </div>
+        <form id="contactForm" class="form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" placeholder="Your message here..." rows="5" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Smart Crop Advisor. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Crop Recommendation Logic
+        document.getElementById('recommendButton').addEventListener('click', function () {
+            const soilType = document.getElementById('soilType').value;
+            const cropResult = document.getElementById('cropResult');
+
+            const crops = {
+                loamy: ['Wheat', 'Corn', 'Potatoes', 'Chickpeas', 'Rice', 'Cotton', 'Maize', 'Onion'],
+                clayey: ['Barley', 'Soybeans', 'Peas', 'Mustard', 'Lentils', 'Millet', 'Cabbage', 'Sunflower', 'Sugarcane'],
+                sandy: ['Peanuts', 'Carrots', 'Watermelon', 'Sorghum', 'Melons', 'Cucumber', 'Garlic', 'Chili', 'Spinach']
+            };
+
+            if (soilType) {
+                cropResult.innerHTML = ` 
+                    <h3>Recommended Crops for ${soilType.charAt(0).toUpperCase() + soilType.slice(1)} Soil:</h3>
+                    <ul>${crops[soilType].map(crop => `<li>${crop}</li>`).join('')}</ul>
+                `;
+            } else {
+                cropResult.innerHTML = `<p>Please select a soil type to get recommendations.</p>`;
+            }
+        });
+
+        // Irrigation Schedule Logic
+        const cropSchedules = {
+            "peanuts": {
+                sowing: "Late spring, 2-3 weeks after the last frost.",
+                germination: "10-14 days.",
+                irrigation: "Every 10-12 days during flowering.",
+                harvest: "120-150 days after planting."
+            },
+            "carrots": {
+                sowing: "Early spring or fall in well-drained soil.",
+                germination: "10-20 days.",
+                irrigation: "Every 7-10 days to maintain soil moisture.",
+                harvest: "70-80 days after planting."
+            },
+            "watermelon": {
+                sowing: "Late spring when the soil is warm (around 70°F).",
+                germination: "3-10 days.",
+                irrigation: "Every 5-7 days during fruit setting.",
+                harvest: "80-90 days after planting."
+            },
+            "sorghum": {
+                sowing: "Late spring after the last frost when soil temperature is around 65°F.",
+                germination: "7-14 days.",
+                irrigation: "Moderate irrigation needed during flowering and grain filling.",
+                harvest: "90-120 days after planting when grains are fully mature."
+            },
+            "melons": {
+                sowing: "Late spring or early summer when the soil is warm.",
+                germination: "3-7 days.",
+                irrigation: "Water frequently during growth, but reduce water as fruits ripen.",
+                harvest: "70-90 days after planting when the fruit emits a sweet aroma."
+            },
+            "cucumber": {
+                sowing: "Late spring or early summer after the last frost.",
+                germination: "5-10 days.",
+                irrigation: "Keep soil evenly moist, water deeply but not too frequently.",
+                harvest: "50-70 days after planting when cucumbers are firm and green."
+            },
+            "garlic": {
+                sowing: "Plant in the fall (October-November) for best results.",
+                germination: "7-10 days after planting.",
+                irrigation: "Water sparingly; only water when the soil is dry.",
+                harvest: "6-8 months after planting when leaves turn yellow."
+            },
+            "chilly": {
+                sowing: "Start indoors in early spring, transplant outdoors after the last frost.",
+                germination: "7-14 days.",
+                irrigation: "Water consistently but avoid over-watering.",
+                harvest: "70-90 days after planting when peppers turn red or desired color."
+            },
+            "spinach": {
+                sowing: "Sow in early spring or late summer for fall crops.",
+                germination: "7-14 days.",
+                irrigation: "Keep the soil consistently moist, especially during hot weather.",
+                harvest: "40-50 days after planting, when leaves are young and tender."
+            },
+            "barley": {
+                "sowing": "Early spring (March-April) when the soil temperature reaches about 40°F (4°C).",
+                "germination": "7-14 days.",
+                "irrigation": "Regular irrigation during dry spells, every 7-10 days. Barley prefers moderate moisture but not waterlogging.",
+                "harvest": "3-4 months after sowing when the grains are hard and the plants are golden in color."
+            },
+            "soybeans": {
+                "sowing": "Late spring, after the last frost (May-June).",
+                "germination": "7-10 days.",
+                "irrigation": "Water every 7-10 days during dry periods, especially when pods start to form.",
+                "harvest": "3-5 months after sowing when the pods turn yellow and the beans rattle inside."
+            },
+            "peas": {
+                "sowing": "Early spring (March-April) when the soil is workable and temperatures are around 45°F (7°C).",
+                "germination": "7-10 days.",
+                "irrigation": "Keep the soil consistently moist during flowering and pod formation, about every 7-10 days.",
+                "harvest": "2-3 months after sowing when the pods are full and peas inside are tender."
+            },
+            "mustard": {
+                "sowing": "Early spring (March-April) or late summer for fall crop.",
+                "germination": "5-10 days.",
+                "irrigation": "Moderate irrigation needed, avoid waterlogging. Water every 7-10 days.",
+                "harvest": "2-3 months after sowing when seeds turn brown and the leaves start to dry."
+            },
+            "lentils": {
+                "sowing": "Early spring (March-April) once the soil has warmed to 45°F (7°C).",
+                "germination": "7-10 days.",
+                "irrigation": "Water every 7-10 days during flowering and pod formation.",
+                "harvest": "3-4 months after sowing when the pods dry and seeds rattle inside."
+            },
+            "millet": {
+                "sowing": "Late spring or early summer when the soil temperature reaches 65°F (18°C).",
+                "germination": "4-7 days.",
+                "irrigation": "Moderate water requirements, every 7-10 days during dry periods.",
+                "harvest": "3-4 months after sowing when the seeds are hard and the panicles are fully matured."
+            },
+            "cabbage": {
+                "sowing": "Early spring for a spring crop or late summer for a fall crop.",
+                "germination": "5-10 days.",
+                "irrigation": "Water consistently, especially during head formation. Water every 7-10 days.",
+                "harvest": "3-4 months after sowing when the heads are firm and fully formed."
+            },
+            "sunflower": {
+                "sowing": "Late spring (May-June) after the last frost when the soil temperature is 70°F (21°C).",
+                "germination": "7-10 days.",
+                "irrigation": "Water regularly, every 7-10 days, to keep the soil moist.",
+                "harvest": "3-4 months after sowing when the flower heads droop and seeds are mature."
+            },
+            "sugarcane": {
+                "sowing": "Planting in early spring (March-April).",
+                "germination": "7-14 days.",
+                "irrigation": "Requires frequent watering, especially during dry periods. Water every 7-10 days.",
+                "harvest": "12-18 months after planting when the stalks are mature and the sugar content is high."
+            },
+            "peanuts": {
+                "sowing": "Late spring (April-May) after the last frost when soil temperatures reach about 70°F (21°C).",
+                "germination": "7-14 days.",
+                "irrigation": "Water every 7-10 days, more often during the flowering period.",
+                "harvest": "4-5 months after planting when the leaves begin to yellow, and the pods are fully mature."
+            },
+            "carrots": {
+                "sowing": "Early spring or fall in well-drained, loose soil.",
+                "germination": "10-20 days.",
+                "irrigation": "Water regularly, every 5-7 days, to maintain consistent moisture.",
+                "harvest": "2-3 months after sowing when roots reach desired size and color."
+            },
+            "watermelon": {
+                "sowing": "Late spring (May-June) when the soil is warm (70°F/21°C).",
+                "germination": "5-7 days.",
+                "irrigation": "Water every 5-7 days during growth, reducing water as fruit ripens.",
+                "harvest": "3-4 months after sowing when the fruit sounds hollow when tapped and the rind turns yellow."
+            },
+            "sorghum": {
+                "sowing": "Late spring after the last frost (May-June) when soil temperature is around 65°F (18°C).",
+                "germination": "7-14 days.",
+                "irrigation": "Moderate irrigation required, especially during flowering.",
+                "harvest": "3-4 months after sowing when the grains are hard and the plant turns yellow."
+            },
+            "melons": {
+                "sowing": "Late spring or early summer when the soil temperature is warm.",
+                "germination": "7-10 days.",
+                "irrigation": "Water every 5-7 days, reducing as fruit ripens.",
+                "harvest": "2-3 months after sowing when the fruit emits a sweet aroma."
+            },
+            "cucumber": {
+                "sowing": "Late spring (May-June) after the last frost.",
+                "germination": "3-7 days.",
+                "irrigation": "Keep the soil evenly moist but avoid over-watering.",
+                "harvest": "2-3 months after sowing when cucumbers are firm and green."
+            },
+            "garlic": {
+                "sowing": "Plant in fall (October-November) for a summer harvest.",
+                "germination": "7-10 days.",
+                "irrigation": "Water sparingly, especially during dry spells.",
+                "harvest": "6-8 months after planting when the leaves turn yellow and the bulbs are fully formed."
+            },
+            "chili": {
+                "sowing": "Start indoors in early spring, transplant outdoors after the last frost.",
+                "germination": "7-14 days.",
+                "irrigation": "Water consistently but avoid over-watering. Allow soil to dry out between waterings.",
+                "harvest": "2-3 months after sowing when the peppers turn red or their desired color."
+            },
+            "spinach": {
+                "sowing": "Early spring or late summer for fall crops.",
+                "germination": "7-14 days.",
+                "irrigation": "Keep the soil consistently moist, especially during hot weather.",
+                "harvest": "1-2 months after sowing when the leaves are tender and young."
+            }
+
+        };
+
+        document.getElementById('scheduleButton').addEventListener('click', function () {
+            const cropType = document.getElementById('cropType').value.trim().toLowerCase();
+            const irrigationResult = document.getElementById('irrigationResult');
+
+            if (cropSchedules[cropType]) {
+                const schedule = cropSchedules[cropType];
+                irrigationResult.innerHTML = `
+                    <h3>${cropType.charAt(0).toUpperCase() + cropType.slice(1)} Schedule:</h3>
+                    <p><strong>Sowing:</strong> ${schedule.sowing}</p>
+                    <p><strong>Germination:</strong> ${schedule.germination}</p>
+                    <p><strong>Irrigation:</strong> ${schedule.irrigation}</p>
+                    <p><strong>Harvest:</strong> ${schedule.harvest}</p>
+                `;
+            } else {
+                irrigationResult.innerHTML = `<p>Sorry, no information available for this crop.</p>`;
+            }
+        });
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,785 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1em;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    color: white;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+}
+
+.cta-button {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background: #218838;
+}
+
+/* Section Styles */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    text-align: center;
+    width: 200px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Forms */
+.form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form input,
+.form select,
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background: #218838;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar a {
+        margin: 5px;
+        font-size: 0.9em;
+    }
+
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .team-member {
+        width: 150px;
+    }
+
+    .profile-pic {
+        width: 80px;
+        height: 80px;
+    }
+
+    .form input,
+    .form select,
+    .form textarea {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5em;
+    }
+
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .team-member {
+        width: 100%;
+    }
+
+    .profile-pic {
+        width: 70px;
+        height: 70px;
+    }
+
+    .form button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+}
+
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(120deg, #f9f9f9, #e0e0e0);
+    animation: backgroundShift 10s infinite linear;
+}
+
+/* Header */
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    /* Center the links */
+    gap: 2rem;
+    /* Space between links */
+    padding: 1rem 2rem;
+    /* Add some padding */
+    background: linear-gradient(to right, #26a69a, #2bbbad);
+    /* Gradient background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    position: sticky;
+    /* Keeps the navbar visible on scroll */
+    top: 0;
+    z-index: 1000;
+}
+
+/* Navbar Links */
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    /* White text */
+    font-size: 1.1rem;
+    /* Slightly larger font */
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    /* Padding inside links */
+    border-radius: 4px;
+    /* Rounded edges */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth hover effects */
+}
+
+/* Hover and Active State */
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Semi-transparent hover effect */
+    transform: scale(1.1);
+    /* Slight zoom effect */
+}
+
+.navbar a:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    /* Darker hover effect */
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        /* Stack links vertically */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .navbar a {
+        font-size: 1rem;
+        /* Smaller font for mobile */
+        padding: 0.5rem;
+    }
+}
+
+header {
+    background: #5cb85c;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideInDown 1s ease-in-out;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: textGlow 3s infinite alternate;
+}
+
+header nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+header nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.4s ease-in-out;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    font-style: normal;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: white;
+    background-image: url('dpreview.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out, zoomIn 2s ease-out;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    animation: textSlide 2s ease-in-out;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 3s ease-in-out;
+}
+
+.hero .cta-button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(92, 184, 92, 0.5);
+    transition: all 0.4s ease-in-out;
+    animation: bounce 3s infinite;
+}
+
+.hero .cta-button:hover {
+    background-color: #4cae4c;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(76, 174, 76, 0.7);
+}
+
+/* General Section Styling */
+.section {
+    width: 100%;
+    padding: 3rem 5%;
+    /* Increased padding for better spacing */
+    background-color: white; /* Light seagreen color */
+    /* Subtle background color for contrast */
+    text-align: center;
+    animation: slideIn 2s ease-out;
+    box-sizing: border-box;
+
+}
+
+
+/* Section Header */
+.section h2 {
+    font-size: 2.5rem;
+    /* Larger for emphasis */
+    margin-bottom: 1.5rem;
+    color: rgb(15, 212, 84);
+    /* Darker text for readability */
+
+    animation: textPop 2s fadeIn 2s ease-in-out;
+}
+
+
+/* Contact Info Styling */
+.contact-info {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #34495e;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Contact Form */
+.form {
+    max-width: 800px;
+    /* Center form with a max width */
+    margin: 0 auto;
+    /* Centering horizontally */
+    display: flex;
+    flex-direction: column;
+    /* Stack form elements vertically */
+    gap: 1.5rem;
+    /* Uniform spacing between form elements */
+    animation: fadeIn 2s ease-in-out;
+}
+
+.form label {
+    font-size: 1rem;
+    text-align: left;
+    color: #2c3e50;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form input:focus,
+.form textarea:focus {
+    border-color: #26a69a;
+    box-shadow: 0 0 8px rgba(38, 166, 154, 0.5);
+    outline: none;
+}
+
+.form button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #26a69a;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form button:hover {
+    background-color: #2bbbad;
+    transform: scale(1.05);
+}
+
+/* Animation Keyframes */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textPop {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .form {
+        padding: 0 5%;
+        /* Ensure form is responsive */
+    }
+
+    .contact-info {
+        font-size: 0.9rem;
+        /* Adjust text size for smaller screens */
+    }
+
+    .section h2 {
+        font-size: 2rem;
+        /* Adjust header size */
+    }
+}
+
+.section .form input,
+.section .form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.section .form input:focus,
+.section .form select:focus {
+    box-shadow: 0 0 10px rgba(92, 184, 92, 0.5);
+}
+
+.section .form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 3s infinite;
+    transition: all 0.3s ease-in-out;
+}
+
+.section .form button:hover {
+    background-color: #4cae4c;
+    transform: translateY(-3px);
+}
+
+/* Team Section Styling */
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: transform 0.6s ease, box-shadow 0.6s ease, border 0.6s ease;
+    border: 5px solid transparent;
+    z-index: 1;
+}
+
+/* Brightening and enlarging border effect on hover */
+.profile-pic:hover {
+    transform: scale(1.2);
+    /* Zoom in the image */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.8);
+    border: 5px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Animation for the round wipe effect */
+.team-member:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 0;
+    animation: wipeEffect 1s ease forwards;
+}
+
+/* Different wipe sizes for each member */
+.team-member:nth-child(1)::before {
+    width: 200px;
+    height: 200px;
+}
+
+.team-member:nth-child(2)::before {
+    width: 220px;
+    height: 220px;
+}
+
+.team-member:nth-child(3)::before {
+    width: 250px;
+    height: 250px;
+}
+
+/* Keyframe for wipe effect */
+@keyframes wipeEffect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+
+    100% {
+        width: inherit;
+        height: inherit;
+        opacity: 0;
+    }
+}
+
+/* Persistent round shape and sticky positioning */
+.profile-pic {
+    position: relative;
+    transition: all 0.4s ease-in-out;
+}
+
+.profile-pic:hover {
+    position: sticky;
+    top: 0;
+}
+
+/* Shadow effect with brightened borders on hover */
+.profile-pic:hover {
+    filter: brightness(1.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Results */
+.result {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    animation: fadeInUp 2s ease-out;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-15px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #5cb85c, 0 0 20px #4cae4c;
+    }
+
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #5cb85c, 0 0 30px #4cae4c, 0 0 40px #4cae4c;
+    }
+}
+
+@keyframes textPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes textSlide {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes backgroundShift {
+    0% {
+        background: linear-gradient(120deg, #f9f9f9, #e0e0e0);
+    }
+
+    50% {
+        background: linear-gradient(120deg, #e0e0e0, #c0c0c0);
+    }
+
+    100% {
+        background: linear-gradient(120deg, #f9f9f9, #e0e0e0);
+    }
+}

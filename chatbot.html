@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmBuddy: Your Agri-Assistant</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #e0f7fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(buddy.jpg);
+            padding: 10px;
+        }
+
+        /* Chat Container */
+        #chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        /* Chat Header */
+        #chat-header {
+            background: linear-gradient(to right, #66bb6a, #43a047);
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chat Body */
+        #chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 450px;
+            border-top: 2px solid #ddd;
+        }
+
+        /* Message Container */
+        #messages {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Message Styling */
+        .user-message,
+        .bot-message {
+            max-width: 75%;
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: #dcedc8;
+            align-self: flex-end;
+            margin-left: 25%;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .bot-message {
+            background: #f1f8e9;
+            align-self: flex-start;
+            margin-right: 25%;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chat Footer */
+        #chat-footer {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-top: 2px solid #ddd;
+            background: #f1f8e9;
+        }
+
+        /* User Input */
+        #user-input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 20px;
+            border: 2px solid #66bb6a;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        #user-input:focus {
+            border-color: #43a047;
+            outline: none;
+        }
+
+        /* Send Button */
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: #66bb6a;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #43a047;
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Send Button Color */
+        #send-btn {
+            background: #66bb6a;
+        }
+
+        #send-btn:hover {
+            background: #43a047;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-container">
+        <div id="chat-header">FarmBuddy: Your Agri-Assistant</div>
+        <div id="chat-body">
+            <div id="messages"></div>
+        </div>
+        <div id="chat-footer">
+            <input type="text" id="user-input" placeholder="Ask me a question..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const sendButton = document.getElementById("send-btn");
+        const inputField = document.getElementById("user-input");
+        const messagesContainer = document.getElementById("messages");
+
+        sendButton.addEventListener("click", async () => {
+            const userMessage = inputField.value;
+            if (userMessage.trim() === "") return;
+
+            addMessage("You", userMessage);
+
+            // Handle Crop-Related Queries
+            const crops = ["ganna", "tomato", "wheat", "rice", "corn", "potato", "cotton", "onion", "carrot", "spinach", "peas", "bell pepper"];
+            for (let crop of crops) {
+                if (userMessage.toLowerCase().includes(crop)) {
+                    const cropResponse = getCropInfo(crop);
+                    addMessage("FarmBuddy", cropResponse);
+                    inputField.value = "";  // Clear the input field after sending a message
+                    return;
+                }
+            }
+
+            // Handle Fertilizer Queries
+            if (userMessage.toLowerCase().includes("fertilizer")) {
+                const fertilizerResponse = getFertilizerInfo(userMessage);
+                addMessage("FarmBuddy", fertilizerResponse);
+                inputField.value = "";  // Clear the input field after sending a message
+            }
+
+            // Handle Weather Queries
+            else if (userMessage.toLowerCase().includes("weather")) {
+                const city = extractCityName(userMessage);
+                const weatherResponse = await getWeatherData(city);
+                addMessage("FarmBuddy", weatherResponse);
+                inputField.value = "";  // Clear the input field after sending a message
+            }
+
+            // Handle Planting Calendar Queries
+            else if (userMessage.toLowerCase().includes("planting calendar")) {
+                const calendarResponse = getPlantingCalendarInfo(userMessage);
+                addMessage("FarmBuddy", calendarResponse);
+                inputField.value = "";  // Clear the input field after sending a message
+            }
+
+            // Handle Pesticide Queries
+            else if (userMessage.toLowerCase().includes("pesticide")) {
+                const pesticideResponse = getPesticideInfo(userMessage);
+                addMessage("FarmBuddy", pesticideResponse);
+                inputField.value = "";  // Clear the input field after sending a message
+            }
+
+            // Default Response
+            else {
+                addMessage("FarmBuddy", "I can help with weather updates, planting schedules, pesticide recommendations, or crop advice. Ask me about these!");
+                inputField.value = "";  // Clear the input field after sending a message
+            }
+        });
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement("div");
+            messageElement.className = sender === "You" ? "user-message" : "bot-message";
+            messageElement.innerText = `${sender}: ${message}`;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function extractCityName(message) {
+            const cityRegex = /in\s([a-zA-Z\s]+)/;
+            const match = message.match(cityRegex);
+            return match ? match[1].trim() : "Karachi";
+        }
+
+        async function getWeatherData(city) {
+            const apiKey = "885d03541b7ab0345297bf85dfd62fd3";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},pk&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.cod === 200) {
+                    const weatherData = data.weather[0];
+                    const temp = data.main.temp;
+                    const description = weatherData.description;
+                    return `Weather in ${city}: ${temp}°C, ${description}`;
+                } else {
+                    return `Couldn't fetch weather for ${city}.`;
+                }
+            } catch {
+                return "Error retrieving weather data.";
+            }
+        }
+
+        function getPlantingCalendarInfo(message) {
+            return (
+                "Here is your planting calendar:\n" +
+                "1. January: Start onions, lettuce, spinach indoors.\n" +
+                "2. February: Begin peppers and tomatoes indoors.\n" +
+                "3. March: Plant carrots and radishes outside.\n" +
+                "4. April: Transplant tomatoes and peppers outdoors.\n" +
+                "5. May: Sow corn, squash, and cucumbers.\n" +
+                "6. June: Continue successive sowing of beans.\n" +
+                "7. July: Harvest early crops and plant fall greens.\n" +
+                "8. August: Sow late carrots and turnips.\n" +
+                "9. September: Transplant lettuce and kale.\n" +
+                "10. October: Plant garlic and onions for next year.\n"
+            );
+        }
+
+        function getCropInfo(crop) {
+            const cropInfo = {
+                ganna: "Sugarcane is a tropical crop. It requires a lot of water and warmth.",
+                tomato: "Tomatoes prefer sunny, well-drained soil and are a summer crop.",
+                wheat: "Wheat is best planted in cool conditions, preferring moderate rainfall.",
+                rice: "Rice thrives in wet, flooded fields and is a major staple crop.",
+                corn: "Corn is a warm-season crop, requiring well-drained soil and moderate irrigation.",
+                potato: "Potatoes prefer cool weather and can be grown in loamy soil.",
+                cotton: "Cotton thrives in hot, dry conditions with plenty of sunlight.",
+                onion: "Onions can be grown year-round in temperate climates, needing well-drained soil.",
+                carrot: "Carrots require deep, loose, and sandy soil to grow.",
+                spinach: "Spinach grows best in cool weather with well-drained, fertile soil.",
+                peas: "Peas prefer cool weather and well-drained, fertile soil.",
+                bell: "Bell peppers require warmth and well-drained soil for a successful harvest."
+            };
+
+            return cropInfo[crop] || `I don't have info about ${crop}.`;
+        }
+
+        function getFertilizerInfo(message) {
+            return (
+                "Common fertilizers include:\n" +
+                "1. Nitrogen fertilizers for leafy growth (Urea, Ammonium nitrate)\n" +
+                "2. Phosphorus fertilizers for root growth (Superphosphate)\n" +
+                "3. Potassium fertilizers for fruit and flower development (Potassium sulfate)\n" +
+                "Always follow the instructions on the fertilizer packaging."
+            );
+        }
+    </script>
+</body>
+
+</html>
